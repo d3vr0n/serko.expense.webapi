@@ -1,12 +1,13 @@
 ﻿using System.Globalization;
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
+using serko.expense.webapi.formatters;
 
 namespace serko.expense.webapi
 {
@@ -29,10 +30,12 @@ namespace serko.expense.webapi
 
             services.AddCors(options =>
             {
-                var allowedDomains = new[] { "http://localhost:4200" };
+                // this is required for UI to call api
+                var allowedDomains = new[] { "http://localhost:4200", "chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop" };
 
                 options.AddPolicy("CorsPolicy",
                     builder => builder
+                        //.AllowAnyOrigin()
                         .WithOrigins(allowedDomains)
                         .AllowAnyMethod()
                         .AllowAnyHeader()
@@ -41,7 +44,32 @@ namespace serko.expense.webapi
 
             //services.AddMvcCore().AddApiExplorer();
             
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options =>
+            {
+                // add input formatter to accept raw string request from body
+                options.InputFormatters.Insert(0, new RawRequestBodyInputFormatter());
+                // after adding InputFormatter, swagger stopped working
+                // hack : https://voidnish.wordpress.com/2018/08/17/asp-net-core-odata-and-swashbuckle-workaround-for-error/
+                foreach (var formatter in options.OutputFormatters
+                    .OfType<RawRequestBodyInputFormatter>()
+                    .Where(it => !it.SupportedMediaTypes.Any()))
+                {
+                    formatter.SupportedMediaTypes.Add(
+                        new MediaTypeHeaderValue("text/plain"));
+                    formatter.SupportedMediaTypes.Add(
+                        new MediaTypeHeaderValue("application/json"));
+                }
+                foreach (var formatter in options.InputFormatters
+                    .OfType<RawRequestBodyInputFormatter>()
+                    .Where(it => !it.SupportedMediaTypes.Any()))
+                {
+                    formatter.SupportedMediaTypes.Add(
+                        new MediaTypeHeaderValue("text/plain"));
+                    formatter.SupportedMediaTypes.Add(
+                        new MediaTypeHeaderValue("application/json"));
+                }
+
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSwaggerGen(c =>
             {
@@ -53,6 +81,9 @@ namespace serko.expense.webapi
 
                 c.DescribeAllEnumsAsStrings();
             });
+
+            // register other services here
+            ServiceStartup.ConfigureServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
