@@ -35,8 +35,29 @@ namespace serko.expense.webapi.Controllers
         [ProducesResponseType(500)]
         public IActionResult GetExpenseFromEmail([FromBody] string emailBody)
         {
+            if (string.IsNullOrWhiteSpace(emailBody))
+            {
+                return BadRequest(Constants.EMPTY_EMAIL_CONTENT);
+            }
 
-            return Ok(_expenseManager.ValidateAndExtract(emailBody));
+            try
+            {
+                return Ok(_expenseManager.ValidateAndExtract(emailBody));
+            }
+            catch (ArgumentException argEx)
+            {
+                return BadRequest(argEx.Message);
+            }
+            catch (Exception e)
+            {
+                if (e.InnerException != null && e.InnerException.Message.Contains(Constants.END_TAG_STRING_SEQUENCE))
+                {
+                    return BadRequest(e.InnerException?.Message);
+                }
+                // log the exception and return 500
+                return StatusCode(500, Constants.GENERAL_EXCEPTION_RESPONSE);
+            }
+            
         }
     }
 }
