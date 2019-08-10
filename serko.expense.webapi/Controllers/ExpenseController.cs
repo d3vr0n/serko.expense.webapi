@@ -16,10 +16,10 @@ namespace serko.expense.webapi.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class ExpenceController : ControllerBase
+    public class ExpenseController : ControllerBase
     {
         private readonly IExpenseManager _expenseManager;
-        public ExpenceController(IExpenseManager expenseManager)
+        public ExpenseController(IExpenseManager expenseManager)
         {
             _expenseManager = expenseManager;
         }
@@ -29,7 +29,7 @@ namespace serko.expense.webapi.Controllers
         /// <response code="200">Expense created</response>
         /// <response code="400">Expense tag has missing/invalid values</response>
         /// <response code="500">Oops! Can't create your Expense right now</response>
-        [HttpPost]
+        [HttpPost("ParseExpenseFromEmail")]
         [ProducesResponseType(typeof(ExpenseModel), 200)]
         [ProducesResponseType(typeof(IDictionary<string, string>), 400)]
         [ProducesResponseType(500)]
@@ -50,10 +50,6 @@ namespace serko.expense.webapi.Controllers
             }
             catch (Exception e)
             {
-                if (e.InnerException != null && e.InnerException.Message.Contains(Constants.END_TAG_STRING_SEQUENCE))
-                {
-                    return BadRequest(e.InnerException?.Message);
-                }
                 // log the exception and return 500
                 return StatusCode(500, Constants.GENERAL_EXCEPTION_RESPONSE);
             }

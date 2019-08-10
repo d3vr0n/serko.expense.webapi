@@ -7,7 +7,6 @@ namespace serko.expense.models
     public static class Constants
     {
         public const decimal GST_PERCENT = 18;
-        public const string END_TAG_STRING_SEQUENCE = "does not match the end tag";
 
         #region response
 

@@ -26,7 +26,7 @@ namespace serko.expense.biz
             if (match.Success)
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(ExpenseModel));
-                using (var sr = new StringReader(match.Value))
+                using (var sr = new StringReader(match.Groups[0].Value))
                 {
                     var expense = (ExpenseModel)serializer.Deserialize(sr);
                     if (!expense.Total.HasValue)
