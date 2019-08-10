@@ -38,7 +38,6 @@ namespace serko.expense.webapi.Controllers
         [ProducesResponseType(500)]
         public IActionResult GetExpenseFromEmail([FromBody] string emailBody)
         {
-            _logger.LogInfo("GetExpenseFromEmail started");
 
             if (string.IsNullOrWhiteSpace(emailBody))
             {
