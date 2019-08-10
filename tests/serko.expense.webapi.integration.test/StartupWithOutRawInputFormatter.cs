@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
 using serko.expense.biz;
 using serko.expense.webapi.formatters;
+using serko.expense.webapi.util;
 
 namespace serko.expense.webapi.integration.test
 {
@@ -32,6 +33,7 @@ namespace serko.expense.webapi.integration.test
 
             // register other services here
             services.AddTransient<IExpenseManager, ExpenseManager>();
+            services.AddScoped<ISerkoLogger, SerkoLogger>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

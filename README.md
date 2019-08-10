@@ -25,6 +25,18 @@ http://localhost:58934/swagger/index.html
 
 You should see expected result under Responses.
 
+## Nuget Usage
+
+This project uses the following Major nuget libraries
+* Microsoft.AspNetCore.App
+* Swashbuckle.AspNetCore
+* Serilog.AspNetCore
+* Microsoft.NET.Test.Sdk
+* NUnit
+* MSTest.TestFramework
+* Microsoft.AspNetCore.Mvc.Testing
+* Microsoft.AspNetCore.TestHost
+
 ## Unit & Integration Tests
 
 Click on VS Test Explorer and run all tests.

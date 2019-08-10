@@ -2,6 +2,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using serko.expense.biz;
+using serko.expense.webapi.util;
 
 namespace serko.expense.webapi
 {
@@ -14,6 +15,8 @@ namespace serko.expense.webapi
         public static void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IExpenseManager, ExpenseManager>();
+
+            services.AddTransient<ISerkoLogger, SerkoLogger>();
         }
     }
 }
