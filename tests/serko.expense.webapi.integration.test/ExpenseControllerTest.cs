@@ -40,6 +40,7 @@ namespace serko.expense.webapi.integration.test
         {
             var url = _baseUrl + "/api/expense/ParseExpenseFromEmail";
             var response = _client.PostAsync(url,new StringContent("")).Result;
+
             Assert.IsTrue(response.StatusCode == HttpStatusCode.BadRequest);
         }
 
@@ -90,8 +91,11 @@ namespace serko.expense.webapi.integration.test
                                 7.15pm. Approximately 12 people but I’ll confirm exact numbers closer to the day.
                                 Regards,
                                 Ivan";
+
+
             var url = _baseUrl + "/api/expense/ParseExpenseFromEmail";
             var response = _client.PostAsync(url, new StringContent(emailContent)).Result;
+
 
             Assert.IsTrue(response.StatusCode == HttpStatusCode.OK);
 

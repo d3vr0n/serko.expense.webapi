@@ -37,6 +37,7 @@ namespace serko.expense.webapi.integration.test
             var url = _baseUrl + "/api/health";
             var response = _client.GetAsync(url).Result;
             var responseString = response.Content.ReadAsStringAsync().Result;
+
             Assert.IsTrue(responseString.ToLower().Contains("\"up\""));
         }
     }

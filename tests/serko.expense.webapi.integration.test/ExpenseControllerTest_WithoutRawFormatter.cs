@@ -38,6 +38,7 @@ namespace serko.expense.webapi.integration.test
         {
             var url = _baseUrl + "/api/expense/ParseExpenseFromEmail";
             var response = _client.PostAsync(url,new StringContent("Hello")).Result;
+
             Assert.IsTrue(response.StatusCode == HttpStatusCode.UnsupportedMediaType);
         }
     }

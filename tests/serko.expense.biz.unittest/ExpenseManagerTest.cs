@@ -45,6 +45,7 @@ namespace serko.expense.biz.unittest
                                     7.15pm. Approximately 12 people but I’ll confirm exact numbers closer to the day.
                                     Regards,
                                     Ivan";
+
             var response = _expenseManager.ValidateAndExtract(emailContent);
 
             Assert.IsNotNull(response);
@@ -83,6 +84,7 @@ namespace serko.expense.biz.unittest
             string payment_method = "personal card";
             int total = 118;
             var emailContent = $"<expense><cost_centre>{cost_centre}</cost_centre><total>{total}</total><payment_method>{payment_method}</payment_method></expense>";
+
             var response = _expenseManager.ValidateAndExtract(emailContent);
 
             Assert.IsNotNull(response);
@@ -99,6 +101,7 @@ namespace serko.expense.biz.unittest
             string payment_method = "personal card";
             int total = 118;
             var emailContent = $"<expense><total>{total}</total><payment_method>{payment_method}</payment_method></expense>";
+
             var response = _expenseManager.ValidateAndExtract(emailContent);
 
             Assert.IsNotNull(response);

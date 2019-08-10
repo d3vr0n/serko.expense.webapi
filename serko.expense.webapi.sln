@@ -11,9 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "serko.expense.biz", "serko.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6949C431-9067-4EDE-8733-54128CD7A7C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "serko.expense.biz.unittest", "tests\serko.expense.biz.unittest\serko.expense.biz.unittest.csproj", "{537D4867-B116-4F97-8113-6B34CF2F76FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "serko.expense.biz.unittest", "tests\serko.expense.biz.unittest\serko.expense.biz.unittest.csproj", "{537D4867-B116-4F97-8113-6B34CF2F76FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "serko.expense.webapi.integration.test", "tests\serko.expense.webapi.integration.test\serko.expense.webapi.integration.test.csproj", "{CA9EF074-219B-42A1-A942-33457618C5AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "serko.expense.webapi.integration.test", "tests\serko.expense.webapi.integration.test\serko.expense.webapi.integration.test.csproj", "{CA9EF074-219B-42A1-A942-33457618C5AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{68EDB7BA-4722-4020-86DC-CB3A587998F9}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
