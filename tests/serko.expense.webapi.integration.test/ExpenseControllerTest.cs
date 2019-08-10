@@ -101,7 +101,7 @@ namespace serko.expense.webapi.integration.test
 
             Assert.IsNotNull(expense);
             Assert.IsTrue(expense.Total == 1024.01m);
-            Assert.IsNotNull(expense.TotalExcludingGST);
+            Assert.AreNotEqual(expense.TotalExcludingGST, 0);
         }
     }
 }

@@ -30,6 +30,10 @@ namespace serko.expense.biz.unittest
                                     <expense><cost_centre>DEV002</cost_centre>
                                     <total>1024.01</total><payment_method>personal card</payment_method>
                                     </expense>
+                                    Another One here.
+                                    <expense><cost_centre>DEV001</cost_centre>
+                                    <total>118</total><payment_method>cash</payment_method>
+                                    </expense>
                                     From: Ivan Castle
                                     Sent: Friday, 16 February 2018 10:32 AM
                                     To: Antoine Lloyd <Antoine.Lloyd@example.com>

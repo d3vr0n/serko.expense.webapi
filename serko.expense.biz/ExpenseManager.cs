@@ -21,6 +21,7 @@ namespace serko.expense.biz
         /// <returns></returns>
         public ExpenseModel ValidateAndExtract(string emailContent)
         {
+            // we are considering only the first matching regex
             Regex expensePattern = new Regex(ExpenseRegexString);
             Match match = expensePattern.Match(emailContent);
             if (match.Success)
